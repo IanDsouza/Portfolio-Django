@@ -30,10 +30,10 @@ class ProjectImageSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ProjectSerializer(serializers.ModelSerializer):
-    images = ProjectImageSerializer(many=True)
+    images_set = ProjectImageSerializer(source='project_image',many=True)
     class Meta:
         model = Project
-        fields = ['id', 'title','start_date','end_date','discription','images']
+        fields = ['id', 'title','start_date','end_date','discription','tech','images_set']
 
 class AcademicSerializer(serializers.ModelSerializer):
     class Meta:

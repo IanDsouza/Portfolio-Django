@@ -61,19 +61,20 @@ class Project(models.Model):
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
     discription = models.CharField(max_length=100)
+    tech = models.CharField(max_length=50,null=True)
 
+    # @property
+    # def images(self):
+    #     return self.image_set.all()
+    
     def __str__(self):
         return self.title
     
 class  ProjectImage(models.Model):
-    project = models.ForeignKey(Project,on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, related_name='project_image', on_delete=models.CASCADE)
     image = models.ImageField(
         upload_to="project/%Y%m/%d/", max_length=255, null=True, blank=True
     )
-
-    @property
-    def images(self):
-        return self.image_set.all()
 
     def __str__(self):
         return (str(self.project))
